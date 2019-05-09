@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SeriousBlog | {% block title%}{% endblock %}</title>
+		<link rel="stylesheet" href={{ url_for('static', filename='style.css') }}?3456>
+		<script type="text/javascript">
+			function loginClick(){
+				{% if user %}
+					location.href= '/page';
+				{% else %}
+					location.href= '/login';
+				{% endif %}
+			}
+			
+			function logOut(){
+				location.href = '/login';
+			}
+		</script>
+	</head>
+	<body>
+		
+		<div id=header>
+			<div id=header_content>
+				<span id=logo>
+					<a href={{ url_for('notes') }} id=main_link>SeriousBlog</a>
+				</span>
+				
+				<div id=btn>
+					<button id=login onclick="loginClick()">
+						<img src={{ url_for('static', filename='account.svg') }} style="vertical-align:middle"/>
+						<span style="vertical-align:middle">
+						{% if user %}
+						{{ user.name }}
+						{% else %}
+						Войти
+						{% endif %}
+						</span>
+					</button>
+					
+					{%if user%}
+					<button id=sign_out onclick="logOut()">
+						Выйти
+					</button>
+					{%else%}
+					<button id=sign_in>
+						Зарегистрироваться
+					</button>
+					{% endif %}
+				</div>
+				
+			</div>
+		</div>
+		
+		{% block notes %}
+		{% endblock %}
+		
+		<div id=mes>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for m in messages %}
+						{{ m }}
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		</div>
+		
+	</body>
+</html>

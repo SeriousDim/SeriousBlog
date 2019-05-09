@@ -1,0 +1,127 @@
+@font-face {
+	font-family: 'Metroplex';
+	src: url('Metroplex.ttf');
+}
+
+a{
+	color:#0069A7;
+}
+		
+body{
+	font-family:Arial;
+	font-size:1em;
+	width: 100%;
+	height: 100%;
+	margin:0px;
+	background-color:#F2F3F3;
+}
+
+footer{
+	background-color:#E3E4E7;
+	border-top:3px solid #4869D6;
+	padding:15px;
+	font-size:0.7em;
+}
+
+#main_link{
+	text-decoration:none;
+	color:white;
+}
+
+#main_link:hover{
+	font-style:underline;
+}
+
+.news{
+	background-color:#E3E4E7;
+	padding:0.8em;
+	margin-top: 1em;
+}
+
+.who_says{
+	font-size:0.8em;
+	font-weight:bold;
+	margin-bottom:1em;
+	color:#4869D6;
+}
+
+.avatar{
+	width: 2.5em;
+	height: 2.5em;
+	vertical-align:middle;
+	background-color:#4869D6;
+	border: 1px solid #4869D6;
+	border-radius:3em;
+}
+			
+#header{
+	color:white;
+	background-color:#4869D6;
+	padding:0.5em;
+	position:fixed;
+	left:0px;
+	top:0px;
+	width: 100%;
+}
+			
+#header_content{
+	width:60%;
+	margin-left:20%;
+	height:2em;
+}
+
+#logo{
+	font-family: 'Metroplex';
+	font-size: 2em;
+	vertical-align:middle;
+}
+			
+#content{
+	width:50%;
+	height: 100%;
+	margin-left:25%;
+	padding:0.5em;
+	margin-top:3em;
+}
+
+#login{
+	vertical-align:middle;
+	background-color:transparent;
+	border-color:transparent;
+	color:white;
+}
+
+#sign_in{
+	vertical-align:middle;
+	background-color:transparent;
+	border-color:transparent;
+	color:white;
+}
+
+#sign_out{
+	vertical-align:middle;
+	background-color:transparent;
+	border-color:transparent;
+	color:white;
+}
+
+#btn{
+	position:fixed;
+	vertical-align:middle;
+	right:20%;
+	height:1em;
+	top:0.4em;
+}
+
+#mes{
+	position: fixed;
+	bottom: 1em;
+	right: 1em;
+	color:white;
+	width: 20%;
+	font-size: 0.9em;
+	border: 0px solid black;
+	border-radius: 0.6em;
+	padding: 0.5em;
+	background-color: rgba(65, 65, 65, 0.8);
+}

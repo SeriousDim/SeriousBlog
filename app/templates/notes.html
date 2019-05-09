@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Записи
+{% endblock %}
+
+{% block notes %}
+	<div id=content>
+			
+		{% for note in notes %}
+		<div class=news>
+			<div class=who_says>
+				<img src={{ url_for('static', filename='account.svg') }} class=avatar />
+				<span style="vertical-align:middle; font-style:bold;">{{ note.author }} говорит</span>
+			</div>
+			{{note.body|safe}}
+		</div>
+		{% endfor %}
+		
+		</div>
+		
+		<footer>
+			SeriousBlog. Created by Serious Games. 2019. All rights reserved.
+			<a href="">Команда разработчиков</a>&nbsp;
+			<a href="">Реклама</a>&nbsp;
+			<a href="">О сервисе</a>&nbsp;
+			<a href="">Техническая поддержка</a>&nbsp;
+		</footer>
+{% endblock %}

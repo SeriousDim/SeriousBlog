@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Вход
+{% endblock %}
+
+{% block notes %}
+	<div id=content>
+		<form id=main_form align=center action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.username.label }}
+				{{ form.username(size=32, class_=input_cls) }}
+			</p>
+			
+			<p>
+				{{ form.password.label }}
+				{{ form.password(size=32, class_=input_cls) }}
+			</p>
+			
+			<p>
+				{{ form.remember() }}
+				<span class=login_desc>
+					{{ form.remember.label }}
+				</span>
+			</p>
+			
+			<p>
+				{{ form.submit() }}
+			</p>
+		</form>
+	</div>
+{% endblock %}
