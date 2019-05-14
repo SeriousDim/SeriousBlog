@@ -4,7 +4,7 @@ from app import my_app
 from app.forms import LoginForm
 
 user = {"name": None}
-notes = [
+posts = [
     {
         "author": "Вадим Горький",
         "body": "Спешу вас всех обрадовать с тем, что мой новый музыкальный альбом наконец-то вышел! Вы можете скачать его прмяо сейчас и слушать на здоровье. Напоминаю, что альбом - бесплатный!"
@@ -49,14 +49,14 @@ notes = [
 
 @my_app.route("/")
 def main():
-    return redirect("/notes")
+    return redirect(url_for("notes"))
 
 @my_app.route("/notes")
-def index():
+def notes():
     if user["name"]==None:
-        return render_template("notes.html", notes=notes)
+        return render_template("notes.html", notes=posts)
     else:
-        return render_template("notes.html", user=user, notes=notes)
+        return render_template("notes.html", user=user, notes=posts)
 
 @my_app.route("/login", methods=["GET", "POST"])
 def login():

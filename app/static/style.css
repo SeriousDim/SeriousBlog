@@ -125,3 +125,13 @@ footer{
 	padding: 0.5em;
 	background-color: rgba(65, 65, 65, 0.8);
 }
+
+#say_smth{
+	color: #4869D6;
+	font-size: 1.2em;
+}
+
+#notearea{
+	width: 100%;
+	padding: 0.5em;
+}
