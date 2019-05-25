@@ -2,18 +2,22 @@
 <html>
 	<head>
 		<title>SeriousBlog | {% block title%}{% endblock %}</title>
-		<link rel="stylesheet" href={{ url_for('static', filename='style.css') }}?12>
+		<link rel="stylesheet" href={{ url_for('static', filename='style.css') }}?21>
 		<script type="text/javascript">
 			function loginClick(){
-				{% if user %}
-					location.href= '/page';
+				{% if not current_user.is_anonymous %}
+					location.href= '/me';
 				{% else %}
 					location.href= '/login';
 				{% endif %}
 			}
 			
 			function logOut(){
-				location.href = '/login';
+				location.href = '/logout';
+			}
+			
+			function register(){
+				location.href = '/register';
 			}
 		</script>
 	</head>
@@ -29,21 +33,21 @@
 					<button id=login onclick="loginClick()">
 						<img src={{ url_for('static', filename='account.svg') }} style="vertical-align:middle"/>
 						<span style="vertical-align:middle">
-						{% if user %}
-						{{ user.name }}
+						{% if current_user.is_anonymous %}
+							Войти
 						{% else %}
-						Войти
+							{{ current_user.username }}
 						{% endif %}
 						</span>
 					</button>
 					
-					{%if user%}
-					<button id=sign_out onclick="logOut()">
-						Выйти
+					{%if current_user.is_anonymous%}
+					<button id=sign_in onclick="register()">
+						Зарегистрироваться
 					</button>
 					{%else%}
-					<button id=sign_in>
-						Зарегистрироваться
+					<button id=sign_out onclick="logOut()">
+						Выйти
 					</button>
 					{% endif %}
 				</div>
@@ -53,16 +57,6 @@
 		
 		{% block notes %}
 		{% endblock %}
-		
-		<div id=mes>
-			{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					{% for m in messages %}
-						{{ m }}
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
-		</div>
 		
 	</body>
 </html>

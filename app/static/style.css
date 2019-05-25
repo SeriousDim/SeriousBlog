@@ -114,16 +114,22 @@ footer{
 }
 
 #mes{
-	position: fixed;
-	bottom: 1em;
-	right: 1em;
 	color:white;
-	width: 20%;
+	width: 40%;
+	margin: auto;
 	font-size: 0.9em;
 	border: 0px solid black;
 	border-radius: 0.6em;
 	padding: 0.5em;
 	background-color: rgba(65, 65, 65, 0.8);
+}
+
+#main_form{
+	margin: auto;
+}
+
+.field{
+	
 }
 
 #say_smth{
@@ -135,3 +141,9 @@ footer{
 	width: 100%;
 	padding: 0.5em;
 }
+
+#submit{
+	background-color: #4869D6;
+	color: white;
+}
+

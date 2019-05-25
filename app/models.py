@@ -1,9 +1,19 @@
-from app import db
+from app import db, login
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-# User BD model class
-class User(db.Model):
+
+
+# User loader function
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+
+# User DB model class
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(64), index=True, unique=True)
@@ -21,7 +31,7 @@ class User(db.Model):
 
 
 
-# Post BD model class
+# Post DB model class
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(300))
