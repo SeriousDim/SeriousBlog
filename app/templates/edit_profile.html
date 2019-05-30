@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Регистрация
+	Изменение профиля
 {% endblock %}
 
 {% block notes %}
+	
 	<div id=content>
 		
 		<form id=main_form align=center action="" method="POST" >
@@ -23,39 +24,18 @@
 				{% endfor %}
 			</tr>
 			
-			<tr>
-				<td class=form_label>{{ form.email.label }}</td>
-				<td>{{ form.email(size=32) }}</td>
-			</tr>
-			
-			<tr>
-				{% for error in form.email.errors %}
-					<td colspan=2 style="color: red; font-size: 0.9em;">{{ error }}</td>
-				{% endfor %}
-			</tr>
-			
 			<tr style="height: 1em"></tr>
 			
 			<tr>
-				<td class=form_label>{{ form.password.label }}</td>
-				<td>{{ form.password(size=32) }}</td>
+				<td colspan=2 class=form_label style="text-align: left">
+					{{ form.about_me.label }}
+				</td>
 			</tr>
 			
 			<tr>
-				{% for error in form.password.errors %}
-					<td colspan=2 style="color: red; font-size: 0.9em;">{{ error }}</td>
-				{% endfor %}
-			</tr>
-			
-			<tr>
-				<td class=form_label>{{ form.password2.label }}</td>
-				<td>{{ form.password2(size=32) }}</td>
-			</tr>
-			
-			<tr>
-				{% for error in form.password2.errors %}
-					<td colspan=2 style="color: red; font-size: 0.9em;">{{ error }}</td>
-				{% endfor %}
+				<td colspan=2>
+					{{ form.about_me(cols=70, rows=7) }}
+				</td>
 			</tr>
 			
 			</table>
@@ -64,7 +44,7 @@
 				{{ form.submit() }}
 			</p>
 			
-			<div id=mes>
+			<div id=mes style="color: #4869D6">
 			{% with messages = get_flashed_messages() %}
 				{% if messages %}
 					{% for m in messages %}
@@ -77,4 +57,5 @@
 		</form>
 		
 	</div>
+	
 {% endblock %}

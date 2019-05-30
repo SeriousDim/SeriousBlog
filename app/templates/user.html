@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ user.username }}
+{% endblock %}
+
+{% block notes %}
+
+	<div id=content>
+		
+		<img src= {{ user.avatar(200) }} style="width: 8em;"/>
+		<div id=user_info>
+			<div id=name>
+				{{ user.username }}
+				
+				{% if user == current_user %}
+				<button id=submit onclick="location.href='/edit'" style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em;">
+					Изменить профиль
+				</button>
+				{% endif %}
+				
+			</div>
+			
+			<div class=other_user>
+				Был(а) в сети {{ user.last_seen }}
+			</div>
+			
+			<div id=about_me>
+				<i>{{ user.about_me }}</i>
+			</div>
+		</div>
+		
+		<hr style="border: 1px solid #4869D6" />
+		
+		<div id=my_notes>
+			{% for note in notes %}
+				{% include "_note.html" %}
+			{% endfor %}
+		</div>
+		
+	</div>
+	
+	<footer>
+			SeriousBlog. Created by Serious Games. 2019. All rights reserved.
+			<a href="">Команда разработчиков</a>&nbsp;
+			<a href="">Реклама</a>&nbsp;
+			<a href="">О сервисе</a>&nbsp;
+			<a href="">Техническая поддержка</a>&nbsp;
+		</footer>
+
+{% endblock %}

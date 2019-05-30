@@ -14,13 +14,7 @@
 		</textarea>
 			
 		{% for note in notes %}
-		<div class=news>
-			<div class=who_says>
-				<img src={{ url_for('static', filename='account.svg') }} class=avatar />
-				<span style="vertical-align:middle; font-style:bold;">{{ note.author }} говорит</span>
-			</div>
-			{{note.body|safe}}
-		</div>
+			{% include "_note.html" %}
 		{% endfor %}
 		
 		</div>

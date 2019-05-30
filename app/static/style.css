@@ -50,7 +50,7 @@ footer{
 	height: 2.5em;
 	vertical-align:middle;
 	background-color:#4869D6;
-	border: 1px solid #4869D6;
+	border: 2px solid #4869D6;
 	border-radius:3em;
 }
 			
@@ -89,6 +89,10 @@ footer{
 	background-color:transparent;
 	border-color:transparent;
 	color:white;
+	display: inline-block;
+	text-decoration: none;
+	margin-right: 0.3em;
+	margin-left: 0.1em;
 }
 
 #sign_in{
@@ -96,6 +100,11 @@ footer{
 	background-color:transparent;
 	border-color:transparent;
 	color:white;
+	display: inline-block;
+	text-decoration: none;
+	margin-top: 0.1em;
+	font-size: 0.9em;
+	margin-left: 0.3em;
 }
 
 #sign_out{
@@ -103,6 +112,11 @@ footer{
 	background-color:transparent;
 	border-color:transparent;
 	color:white;
+	display: inline-block;
+	text-decoration: none;
+	margin-top: 0.1em;
+	font-size: 0.9em;
+	margin-left: 0.3em;
 }
 
 #btn{
@@ -114,14 +128,13 @@ footer{
 }
 
 #mes{
-	color:white;
+	color:red;
 	width: 40%;
 	margin: auto;
 	font-size: 0.9em;
 	border: 0px solid black;
 	border-radius: 0.6em;
 	padding: 0.5em;
-	background-color: rgba(65, 65, 65, 0.8);
 }
 
 #main_form{
@@ -144,6 +157,57 @@ footer{
 
 #submit{
 	background-color: #4869D6;
+	border: none;
+	padding: 0.3em 1.2em;
+	border-radius: 3px;
 	color: white;
+	font-size: 0.9em;
 }
 
+#user_info{
+	display: inline;
+	height: 20%;
+}
+
+#name{
+	display: inline-block;
+	margin-top: 0.5em;
+	vertical-align: top;
+	font-size: 1.8em;
+}
+
+.other_user{
+	margin-left: 0px;
+	margin-top: 0.1em;
+	font-size: 1.1em;
+}
+
+#about_me{
+	margin-left: 0px;
+	margin-top: 0.3em;
+	font-size: 0.8em;
+}
+
+#account_avatar{
+	vertical-align: middle;
+	border: 0px solid black;
+	border-radius: 0.6em;
+}
+
+#form_table{
+	margin: 0 auto;
+}
+
+#form_table.td{
+	padding: 1em;
+}
+
+.form_label{
+	text-align: right;
+	font-size: 0.9em;
+	padding-right: 0.5em;
+}
+
+#area{
+	font-size: 1em;
+}

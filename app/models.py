@@ -2,6 +2,7 @@ from app import db, login
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
 
 
 
@@ -18,7 +19,10 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship("Post", backref="author", lazy="dynamic")
+    last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    about_me = db.Column(db.String(300), default="Расскажите о себе")
+
+    posts = db.relationship("Post", backref="author", lazy="dynamic") # создается мнимое поле в таблице (внимание!) Post. При запросе some_post.author вернутся все записи, пренадлежащие пользователю User
 
     def __repr__(self):
         return "<User {}: {}. {}>".format(self.id, self.username, self.email)
@@ -28,6 +32,10 @@ class User(UserMixin, db.Model):
 
     def check_password(self, word):
         return check_password_hash(self.password_hash, word)
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 
 
 
