@@ -17,6 +17,14 @@
 				<button id=submit onclick="location.href='/edit'" style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em;">
 					Изменить профиль
 				</button>
+				{% elif not current_user.is_following(user) %}
+				<a id=submit href={{ url_for("follow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; text-decoration: none;">
+					Подписаться
+				</a>
+				{% else %}
+				<a id=submit href={{ url_for("unfollow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; background-color: white; text-decoration: none; color:#4869D6; border: 1px solid #4869D6">
+					Отписаться
+				</a>
 				{% endif %}
 				
 			</div>

@@ -156,3 +156,35 @@ def edit():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template("edit_profile.html", form=form)
+
+
+
+@my_app.route("/follow/<username>")
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        # flash("Пользователь {} не найден".format(username))
+        return render_template("error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
+    if user == current_user:
+        # flash('Вы не можете подписаться на себя!')
+        return render_template("error.html", number="Ошибка", description="Вы не можете подписаться на себя!")
+    current_user.follow(user)
+    db.session.commit()
+    # flash('Вы подписаны!')
+    return redirect(url_for('me', username=username))
+
+
+
+@my_app.route("/unfollow/<username>")
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return render_template("error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
+    if user == current_user:
+        return render_template("error.html", number="Ошибка", description="Вы не можете отписаться от себя!")
+    current_user.unfollow(user)
+    db.session.commit()
+    # flash('Вы отписались')
+    return redirect(url_for('me', username=username))

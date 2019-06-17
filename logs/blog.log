@@ -71,3 +71,44 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed
 [SQL: UPDATE user SET username=?, about_me=? WHERE user.id = ?]
 [parameters: ('Роберт Дауни младший', 'Где-то я его уже видел...', 1)]
 (Background on this error at: http://sqlalche.me/e/gkpj)
+2019-06-15 20:18:33,770 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-15 20:46:39,756 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-15 20:46:47,420 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-16 21:52:30,733 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-16 22:15:01,791 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 21:56:10,541 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 21:59:55,144 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 23:09:43,792 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 23:10:26,756 ERROR: Exception on /follow/Дмитрий Лыков [GET] [in E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py:1780]
+Traceback (most recent call last):
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py", line 2311, in wsgi_app
+    response = self.full_dispatch_request()
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py", line 1834, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py", line 1737, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\_compat.py", line 36, in reraise
+    raise value
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py", line 1832, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py", line 1818, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "E:\MyFolder\MyProjects\SeriousBlog\app\routes.py", line 175, in follow
+    return redirect(url_for('me'), username=username)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\app.py", line 2080, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\_compat.py", line 36, in reraise
+    raise value
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "E:\MyFolder\MyProjects\SeriousBlog\env\lib\site-packages\werkzeug\routing.py", line 2007, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'me'. Did you forget to specify values ['username']?
+2019-06-17 23:12:51,141 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 23:12:52,218 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 23:14:02,865 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-17 23:14:03,874 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
