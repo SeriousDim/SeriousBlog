@@ -112,3 +112,4 @@ werkzeug.routing.BuildError: Could not build url for endpoint 'me'. Did you forg
 2019-06-17 23:12:52,218 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
 2019-06-17 23:14:02,865 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
 2019-06-17 23:14:03,874 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]
+2019-06-18 01:20:40,673 INFO: SeriousBlog started [in E:\MyFolder\MyProjects\SeriousBlog\app\__init__.py:51]

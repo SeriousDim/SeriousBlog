@@ -52,4 +52,9 @@ class EditProfileForm(FlaskForm):
                 raise ValidationError("Это имя уже занято, введите другое")
     
     
-    
+
+# форма отправки поста
+class PostForm(FlaskForm):
+    post = TextAreaField('Напишите о своих мыслях', validators=[
+        DataRequired(), Length(min=1, max=300)
+    ])
