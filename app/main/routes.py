@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, redirect, flash, url_for, request
-from app import my_app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
-from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
-from werkzeug.urls import url_parse
+from app import db
+from flask_login import current_user, logout_user, login_required
+from app.models import User, Post
 from datetime import datetime
 
-u1 = {'username': 'Василий Пупкин'}
+from app.main.forms import EditProfileForm, PostForm
+from app.main import bp
+
+
+
+"""
 posts = [
     {
         "author": u1,
@@ -50,100 +53,48 @@ posts = [
         "body": "Jinja (произносится как дзиндзя) — это шаблонизатор для языка программирования Python. Он подобен шаблонизатору Django, но предоставляет Python-подобные выражения, обеспечивая исполнение шаблонов в песочнице. Это текстовый шаблонизатор, поэтому он может быть использован для создания любого вида разметки, а также исходного кода. Лицензирован под BSD лицензией. Шаблонизатор Jinja позволяет настраивать теги[1], фильтры, тесты и глобальные переменные[2]. Также, в отличие от шаблонизатора Django, Jinja позволяет конструктору шаблонов вызывать функции с аргументами на объектах."
     }
 ]
+"""
 
 
 
-
-@my_app.before_request
+@bp.before_request
 def before():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
 
-@my_app.route("/")
+@bp.route("/")
 def main():
-    return redirect(url_for("notes"))
+    return redirect(url_for("main.notes"))
 
 
 
-@my_app.route("/notes")
+@bp.route("/notes", methods=["GET", "POST"])
 @login_required
 def notes():
-    return render_template("notes.html", notes=posts)
-
-
-
-@my_app.route("/login", methods=["GET", "POST"])
-def login():
-    if current_user.is_authenticated:                       # если пользователь уже вошел
-        return redirect(url_for("notes"))
-    form = LoginForm()                                      # создание формы
-    if form.validate_on_submit():                           # вызывается при запросе POST, при нажатии на кнопку Submit
-        user = User.query.filter_by(username=form.username.data).first()
-        if user == None or not user.check_password(form.password.data):     # если пользователя не существует млм пароль неверный
-            flash("Неверное имя пользователя или пароль")
-            return render_template("login.html", form=form)                 # возвращаем эту же самую форму
-
-        login_user(user, remember=form.remember.data)      # иначе входим в систему
-        next_page = request.args.get('next')               # и проверяем параметр next
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for("notes")
-        return redirect(next_page)
-
-    return render_template("login.html", form=form)
-
-
-
-@my_app.route("/logout")
-def logout():
-    logout_user()
-    return redirect(url_for("login"))
-
-
-
-@my_app.route("/register", methods=["GET", "POST"])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for("notes"))
-    form = RegistrationForm()
+    form = PostForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
         db.session.commit()
-        return redirect(url_for("login"))
-    return render_template("register.html", form=form)
+        flash("Ваш пост опубликован!")
+        return redirect(url_for("main.notes"))
+    posts = current_user.followed_posts().all()
+    return render_template("main/notes.html", notes=posts, form=form)
 
 
 
-@my_app.route("/me/<username>")
+@bp.route("/me/<username>")
 @login_required
 def me(username):
     user = User.query.filter_by(username=username).first_or_404()
-    my_posts = [
-        {
-            'author': user,
-            'body': "Моя первая запись"
-        },
-        {
-            'author': user,
-            'body': "Неужели скоро каникулы, всего нужно потерпеть 3 дня!"
-        },
-        {
-            'author': user,
-            'body': "Продвижение по Flask! Урок 5 пройден"
-        },
-        {
-            'author': user,
-            'body': "Скоро СовТех! Надо готовиться! А ведь еще Retrofit изучать..."
-        }
-    ]
-    return render_template("user.html", notes=my_posts, user=user)
+    my_posts = user.posts.order_by(Post.timestamp.desc())
+    return render_template("main/user.html", notes=my_posts, user=user)
 
 
 
-@my_app.route("/edit", methods=["GET", "POST"])
+@bp.route("/edit", methods=["GET", "POST"])
 def edit():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
@@ -151,40 +102,47 @@ def edit():
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash("Изменения успешно сохранены")
-        return redirect(url_for("edit"))
+        return redirect(url_for("main.edit"))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template("edit_profile.html", form=form)
+    return render_template("main/edit_profile.html", form=form)
 
 
 
-@my_app.route("/follow/<username>")
+@bp.route("/follow/<username>")
 @login_required
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
         # flash("Пользователь {} не найден".format(username))
-        return render_template("error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
+        return render_template("errors/error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
     if user == current_user:
         # flash('Вы не можете подписаться на себя!')
-        return render_template("error.html", number="Ошибка", description="Вы не можете подписаться на себя!")
+        return render_template("errors/error.html", number="Ошибка", description="Вы не можете подписаться на себя!")
     current_user.follow(user)
     db.session.commit()
     # flash('Вы подписаны!')
-    return redirect(url_for('me', username=username))
+    return redirect(url_for('main.me', username=username))
 
 
 
-@my_app.route("/unfollow/<username>")
+@bp.route("/unfollow/<username>")
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        return render_template("error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
+        return render_template("errors/error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
     if user == current_user:
-        return render_template("error.html", number="Ошибка", description="Вы не можете отписаться от себя!")
+        return render_template("errors/error.html", number="Ошибка", description="Вы не можете отписаться от себя!")
     current_user.unfollow(user)
     db.session.commit()
     # flash('Вы отписались')
-    return redirect(url_for('me', username=username))
+    return redirect(url_for('main.me', username=username))
+
+
+
+@bp.route("/globe")
+def globe():
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template("main/notes.html", notes=posts)

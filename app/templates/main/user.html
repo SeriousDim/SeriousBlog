@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main/base.html" %}
 
 {% block title %}
 	{{ user.username }}
@@ -14,15 +14,15 @@
 				{{ user.username }}
 				
 				{% if user == current_user %}
-				<button id=submit onclick="location.href='/edit'" style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em;">
+				<a id=submit href={{ url_for("main.edit", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; text-decoration: none;">
 					Изменить профиль
-				</button>
+				</a>
 				{% elif not current_user.is_following(user) %}
-				<a id=submit href={{ url_for("follow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; text-decoration: none;">
+				<a id=submit href={{ url_for("main.follow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; text-decoration: none;">
 					Подписаться
 				</a>
 				{% else %}
-				<a id=submit href={{ url_for("unfollow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; background-color: white; text-decoration: none; color:#4869D6; border: 1px solid #4869D6">
+				<a id=submit href={{ url_for("main.unfollow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; background-color: white; text-decoration: none; color:#4869D6; border: 1px solid #4869D6">
 					Отписаться
 				</a>
 				{% endif %}
@@ -42,7 +42,7 @@
 		
 		<div id=my_notes>
 			{% for note in notes %}
-				{% include "_note.html" %}
+				{% include "main/_note.html" %}
 			{% endfor %}
 		</div>
 		

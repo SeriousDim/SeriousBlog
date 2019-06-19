@@ -1,0 +1,69 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+	{% if form %}
+		Записи
+	{% else %}
+		Глобус - записи со всего мира
+	{% endif %}
+{% endblock %}
+
+{% block notes %}
+	<div id=content>
+	
+		<div id=make_note>
+		
+		{% if form %}
+			<form action="" method="POST">
+				{{ form.hidden_tag() }}
+		
+			<div style="display: table; width: 100%;">
+				<p style="display: table-row">
+					<div id=say_smth>
+							{{ form.post.label }}
+					</div>
+				</p>
+		
+				<p style="display: table-row">
+					{{ form.post(cols=70, rows=5) }}
+				</p>
+				
+				<p style="display: table-row;">
+					{% for error in form.post.errors %}
+					<div style="display: table-cell; color: red; font-size: 0.9em;">
+						error
+					</div>
+					{% endfor %}
+				</p>
+			</div>
+			
+			{{ form.submit() }}
+			</form>
+			
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for m in messages %}
+						<p id=mes style="color: #4869D6;">
+							{{ m }}
+						</p>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		{% endif %}
+		
+		</div>
+			
+		{% for note in notes %}
+			{% include "main/_note.html" %}
+		{% endfor %}
+		
+		</div>
+		
+		<footer>
+			SeriousBlog. Created by Serious Games. 2019. All rights reserved.
+			<a href="">Команда разработчиков</a>&nbsp;
+			<a href="">Реклама</a>&nbsp;
+			<a href="">О сервисе</a>&nbsp;
+			<a href="">Техническая поддержка</a>&nbsp;
+		</footer>
+{% endblock %}

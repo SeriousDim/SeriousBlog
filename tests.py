@@ -1,17 +1,22 @@
 import unittest
 from datetime import datetime, timedelta
-from app import my_app, db
+from app import db
 from app.models import User, Post
 from hashlib import md5
+from config import TestConfig
+from app import create_app
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        my_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_hashing(self):
         u = User(username="Vasiliy")

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>SeriousBlog | {% block title%}{% endblock %}</title>
-		<link rel="stylesheet" href={{ url_for('static', filename='style.css') }}?134>
+		<link rel="stylesheet" href={{ url_for('static', filename='style.css') }}?12233>
 		<script type="text/javascript">
 			function loginClick(){
 				{% if not current_user.is_anonymous %}
@@ -27,15 +27,25 @@
 			<div id=header_content>
 			
 				<span id=logo>
-					<a href={{ url_for('notes') }} id=main_link>SeriousBlog</a>
+					<a href={{ url_for('main.notes') }} id=main_link>SeriousBlog</a>
 				</span>
+				
+				<a id=globe href={{ url_for("main.notes") }}>
+					Главная
+				</a>
+				
+				|
+				
+				<a id=globe href={{ url_for("main.globe") }}>
+					Глобус
+				</a>
 				
 				<div id=btn>
 					<a id=login
 					href = {% if current_user.is_anonymous %}
-						{{ url_for('login') }}
+						{{ url_for('auth.login') }}
 					{% else %}
-						{{ url_for('me', username=current_user.username) }}
+						{{ url_for('main.me', username=current_user.username) }}
 					{% endif %}
 					>
 						<img class=avatar style="width: 2em; height: 2em;" src=
@@ -59,11 +69,11 @@
 					|
 					
 					{%if current_user.is_anonymous%}
-					<a id=sign_in href={{ url_for('register') }}>
+					<a id=sign_in href={{ url_for('auth.register') }}>
 						Зарегистрироваться
 					</a>
 					{%else%}
-					<a id=sign_out href={{ url_for('logout') }}>
+					<a id=sign_out href={{ url_for('auth.logout') }}>
 						Выйти
 					</a>
 					{% endif %}

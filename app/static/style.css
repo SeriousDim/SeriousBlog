@@ -133,6 +133,7 @@ footer{
 	border: 0px solid black;
 	border-radius: 0.6em;
 	padding: 0.5em;
+	text-align: center;
 }
 
 #main_form{
@@ -141,11 +142,6 @@ footer{
 
 .field{
 	
-}
-
-#say_smth{
-	color: #4869D6;
-	font-size: 1.2em;
 }
 
 #notearea{
@@ -212,7 +208,7 @@ footer{
 
 #error_num{
 	color: red;
-	font-size: 10em;
+	font-size: 8em;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -222,4 +218,56 @@ footer{
 	margin: 0 auto;
 }
 
+#say_smth{
+	color: #4869D6;
+	font-size: 1.2em;
+	display: table-cell;
+}
+
+#post_submit{
+	background-color: #4869D6;
+	border: none;
+	padding: 0.3em 1.2em;
+	border-radius: 3px;
+	color: white;
+	font-size: 0.9em;
+	text-align: center;
+}
+
+#post_field{
+	display: table-cell;
+	width: 100%;
+	border: 1px solid #c5c5c5;
+	background-color: white;
+	border-radius: 0.5em;
+}
+
+#side{
+	width: 10%;
+	position: fixed;
+	top: 4em;
+	left: 15%;
+}
+
+#side_elem{
+	display: block;
+	color: #4869D6;
+	font-size: 1.2em;
+	padding: 0.3em;
+}
+
+#globe{
+	vertical-align:middle;
+	background-color:transparent;
+	border-color:transparent;
+	color:white;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 0.9em;
+	margin-left: 0.3em;
+}
+
+#make_note{
+	
+}
 
