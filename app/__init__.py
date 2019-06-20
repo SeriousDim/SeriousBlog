@@ -55,17 +55,22 @@ def create_app(config=Config()):
             my_app.logger.addHandler(mail_handler)
 
     # логирование в файл
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    fh = RotatingFileHandler('logs/blog.log', maxBytes=1024*100, backupCount=100)
-    fh.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-    ))
-    fh.setLevel(logging.INFO)
+    if my_app.config["LOG_TO_STDOUT"]:
+        stream_h = logging.StreamHandler()
+        stream_h.setLevel(logging.INFO)
+        my_app.logger.addHandler(stream_h)
+    else:
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+        fh = RotatingFileHandler('logs/blog.log', maxBytes=1024*100, backupCount=100)
+        fh.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+        ))
+        fh.setLevel(logging.INFO)
+        my_app.logger.addHandler(fh)
 
-    my_app.logger.addHandler(fh)
-    my_app.logger.setLevel(logging.INFO)
-    my_app.logger.info("SeriousBlog started")
+        my_app.logger.setLevel(logging.INFO)
+        my_app.logger.info("SeriousBlog started")
 
     return my_app
 
