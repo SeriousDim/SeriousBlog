@@ -34,6 +34,9 @@ def create_app(config=Config()):
     from app.main import bp as main_bp
     my_app.register_blueprint(main_bp)
 
+    from app.api import bp as api_bp
+    my_app.register_blueprint(api_bp, url_prefix="/api")
+
     # для продакш-сервера: отправка ошибок по почте
     if not my_app.debug and not my_app.testing:
         if my_app.config["MAIL_SERVER"]:

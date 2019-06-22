@@ -1,8 +1,12 @@
 from app import db, login
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+from flask import url_for
+
+from base64 import b64encode
+import os
 
 
 
@@ -29,6 +33,9 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     about_me = db.Column(db.String(300), default="Расскажите о себе")
+
+    token = db.Column(db.String(32), index=True, unique=True)
+    token_expiration = db.Column(db.DateTime)
 
     posts = db.relationship("Post", backref="author", lazy="dynamic") # создается мнимое поле в таблице (внимание!) Post. При запросе some_post.author вернутся все записи, пренадлежащие пользователю User
     followed = db.relationship('User', secondary='followers',
@@ -67,6 +74,57 @@ class User(UserMixin, db.Model):
             followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
+
+    @staticmethod
+    def to_collection(query):
+        return {'items': [item.to_dict() for item in query.all()]}
+
+    def to_dict(self, include_email=False):
+        data = {
+            'id': self.id,
+            'username': self.username,
+            'last_seen': self.last_seen.isoformat()+'Z',
+            'about_me': self.about_me,
+            'post_count': self.posts.count(),
+            'followers_count': self.followers.count(),
+            'followed_count': self.followed.count(),
+            '_links': {
+                'self': url_for('api.get_user', id=self.id),
+                'followers': url_for('api.get_followers', id=self.id),
+                'followed': url_for('api.get_followed', id=self.id),
+                'avatar': self.avatar(128)
+            }
+        }
+        if include_email:
+            data['email'] = self.email
+        return data
+
+    def from_dict(self, data, new_user=False):
+        for field in ['username', 'email', 'about_me']:
+            if field in data:
+                setattr(self, field, data[field])
+        if new_user and 'password' in data:
+            self.set_password(data['password'])
+
+    def get_token(self, expires_in=3600):
+        now = datetime.utcnow()
+        if self.token and self.token_expiration > datetime.utcnow() + timedelta(seconds = 60):
+            return self.token
+        self.token = b64encode(os.urandom(24)).decode('utf-8')
+        self.token_expiration = datetime.utcnow() + timedelta(seconds=expires_in)
+        db.session.add(self)
+        return self.token
+
+
+    def revoke_token(self):
+        self.token_expiration = datetime.utcnow() - timedelta(seconds = 1)
+
+    @staticmethod
+    def check_token(token):
+        user = User.query.filter_by(token=token).first()
+        if user is None or user.token_expiration < datetime.utcnow():
+            return None
+        return user
 
 
 
