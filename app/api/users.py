@@ -1,10 +1,28 @@
 from app.api import bp
-from app.models import User
+from app.models import User, Post
 from app import db
-from flask import jsonify, request, url_for
+from flask import jsonify, request, url_for, g
 
 from app.api.errors import bad_request
 from app.api.auth import token_auth
+
+@bp.route('/users/<int:id>/posts', methods=["GET"])
+@token_auth.login_required
+def get_posts(id):
+    user = User.query.get_or_404(id)
+    posts = Post.to_collection(user.posts)
+    return jsonify({'posts':posts})
+
+@bp.route("/users/post", methods=["POST"])
+@token_auth.login_required
+def create_post():
+    data = request.get_json() or {}
+    if 'body' not in data:
+        return bad_request("must include body")
+    post = Post(body=data['body'], author=g.current_user)
+    db.session.add(post)
+    db.session.commit()
+    return jsonify(post.to_dict())
 
 @bp.route('/users/<int:id>', methods=["GET"])
 @token_auth.login_required

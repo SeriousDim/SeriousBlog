@@ -108,10 +108,10 @@ class User(UserMixin, db.Model):
 
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
-        if self.token and self.token_expiration > datetime.utcnow() + timedelta(seconds = 60):
+        if self.token and self.token_expiration > now + timedelta(seconds = 60):
             return self.token
         self.token = b64encode(os.urandom(24)).decode('utf-8')
-        self.token_expiration = datetime.utcnow() + timedelta(seconds=expires_in)
+        self.token_expiration = now + timedelta(seconds=expires_in)
         db.session.add(self)
         return self.token
 
@@ -137,3 +137,18 @@ class Post(db.Model):
 
     def __repr__(self):
         return "Post {}. {} {}\n{}".format(self.id, self.user_id, self.timestamp, self.body)
+
+    @staticmethod
+    def to_collection(query):
+        return [item.to_dict() for item in query.all()]
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'body': self.body,
+            'timestamp': self.timestamp.isoformat() + 'Z',
+            'user_id': self.user_id,
+            '_links': {
+                'author': url_for('api.get_user', id=self.user_id)
+            }
+        }

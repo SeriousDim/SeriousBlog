@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from flask import jsonify, g
 from app import db
 from app.api import bp
@@ -11,7 +12,7 @@ def get_token():
     return jsonify({'token': token})
 
 @bp.route('/token', methods=["DELETE"])
-@token_auth.login_required()
+@token_auth.login_required
 def revoke_token():
     g.current_user.revoke_token()
     db.session.commit()
