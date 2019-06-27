@@ -14,7 +14,7 @@ from app.api.auth import token_auth
 @bp.route('/test_post', methods=["POST"])
 def test_post():
     data = request.get_json() or {}
-    return jsonify({'body': data["body"]})
+    return jsonify({'body': "I got some data: "+data["body"]})
 
 @bp.route('/users/<int:id>/posts', methods=["GET"])
 def get_posts(id):
