@@ -11,7 +11,7 @@ from app.api.auth import token_auth
 def get_posts(id):
     user = User.query.get_or_404(id)
     posts = Post.to_collection(user.posts)
-    return jsonify({'posts':posts})
+    return jsonify(posts)
 
 @bp.route("/users/post", methods=["POST"])
 @token_auth.login_required

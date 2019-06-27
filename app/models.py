@@ -115,7 +115,6 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         return self.token
 
-
     def revoke_token(self):
         self.token_expiration = datetime.utcnow() - timedelta(seconds = 1)
 
