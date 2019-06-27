@@ -77,7 +77,7 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def to_collection(query):
-        return {'items': [item.to_dict() for item in query.all()]}
+        return [item.to_dict() for item in query.all()]
 
     def to_dict(self, include_email=False):
         data = {
