@@ -6,8 +6,17 @@ from flask import jsonify, request, url_for, g
 from app.api.errors import bad_request
 from app.api.auth import token_auth
 
+"""
+    ВЕРНУТЬ login_required методам
+    get_posts и get_users!!
+"""
+
+@bp.route('/test_post', methods=["POST"])
+def test_post():
+    data = request.get_json() or {}
+    return jsonify({'body': 'POST OK'})
+
 @bp.route('/users/<int:id>/posts', methods=["GET"])
-@token_auth.login_required
 def get_posts(id):
     user = User.query.get_or_404(id)
     posts = Post.to_collection(user.posts)
@@ -30,7 +39,6 @@ def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
 
 @bp.route('/users', methods=["GET"])
-@token_auth.login_required
 def get_users():
     return jsonify(User.to_collection(User.query))
 
