@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block title %}
-	Изменение профиля
+	{{ _('Изменение профиля') }}
 {% endblock %}
 
 {% block notes %}
@@ -11,34 +11,45 @@
 		<form id=main_form align=center action="" method="POST" >
 			 {{ form.hidden_tag() }}
 			 
-			<table id=form_table>
-			 
-			<tr>
-				<td class=form_label>{{ form.username.label }}</td>
-				<td>{{ form.username(size=32) }}</td>
-			</tr>
-			
-			<tr>
-				{% for error in form.username.errors %}
-					<td colspan=2 style="color: red; font-size: 0.9em;">{{ error }}</td>
-				{% endfor %}
-			</tr>
-			
-			<tr style="height: 1em"></tr>
-			
-			<tr>
-				<td colspan=2 class=form_label style="text-align: left">
-					{{ form.about_me.label }}
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan=2>
-					{{ form.about_me(cols=70, rows=7) }}
-				</td>
-			</tr>
-			
-			</table>
+            <table id=form_table>
+
+                <tr>
+                    <td class=form_label>{{ form.username.label }}</td>
+                    <td>{{ form.username(size=32) }}</td>
+                </tr>
+
+                <tr>
+                    {% for error in form.username.errors %}
+                    <td colspan=2 style="color: red; font-size: 0.9em;">{{ error }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td class=form_label>{{ form.email.label }}</td>
+                    <td>{{ form.email(size=32) }}</td>
+                </tr>
+
+                <tr>
+                    {% for error in form.email.errors %}
+                    <td colspan=2 style="color: red; font-size: 0.9em;">{{ error }}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr style="height: 1em"></tr>
+
+                <tr>
+                    <td colspan=2 class=form_label style="text-align: left">
+                        {{ form.about_me.label }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan=2>
+                        {{ form.about_me(cols=70, rows=7) }}
+                    </td>
+                </tr>
+
+            </table>
 			
 			<p>
 				{{ form.submit() }}

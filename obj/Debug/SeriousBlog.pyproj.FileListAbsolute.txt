@@ -1,0 +1,3 @@
+E:\MyFolder\MyProjects\SeriousBlog\obj\Debug\SeriousBlog.pyproj.CoreCompileInputs.cache
+E:\MyFolder\MyProjects\SeriousBlog\bin\Microsoft.PythonTools.WebRole.dll
+E:\MyFolder\MyProjects\SeriousBlog\bin\wfastcgi.py

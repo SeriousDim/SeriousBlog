@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
+from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_mail import Mail
+from flask_moment import Moment
+from flask_bootstrap import Bootstrap
+from flask_babel import Babel
 
 import logging
 import os
@@ -12,8 +16,18 @@ from config import Config
 
 db = SQLAlchemy()
 migration = Migrate()
+
 login = LoginManager()
 login.login_view = 'auth.login'
+
+mail = Mail()
+moment = Moment()
+bootstrap = Bootstrap()
+babel = Babel()
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
 
 def create_app(config=Config()):
     my_app = Flask(__name__)
@@ -23,6 +37,10 @@ def create_app(config=Config()):
     db.init_app(my_app)
     migration.init_app(my_app, db)
     login.init_app(my_app)
+    mail.init_app(my_app)
+    moment.init_app(my_app)
+    bootstrap.init_app(my_app)
+    babel.init_app(my_app)
 
     # регистрация blueprint`ов
     from app.errors import bp as errors_bp
@@ -44,7 +62,7 @@ def create_app(config=Config()):
             if my_app.config['MAIL_USERNAME'] or my_app.config['MAIL_PASSWORD']:
                 auth = (my_app.config['MAIL_USERNAME'], my_app.config['MAIL_PASSWORD'])
             secure = None
-            if my_app.config["MAIL_USE_TLS"]:
+            if my_app.config["MAIL_USE_SSL"]:
                 secure = ()
             mail_handler = SMTPHandler(
                 mailhost = (my_app.config["MAIL_SERVER"], my_app.config["MAIL_PORT"]),
@@ -76,8 +94,3 @@ def create_app(config=Config()):
         my_app.logger.info("SeriousBlog started")
 
     return my_app
-
-
-
-
-

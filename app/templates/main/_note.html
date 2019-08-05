@@ -1,7 +1,10 @@
 <div class=news>
 	<div class=who_says>
 		<img src={{ note.author.avatar(45) }} class=avatar />
-		<a style="vertical-align:middle; font-style:bold; text-decoration:none;" href={{ url_for("main.me", username=note.author.username) }}>{{ note.author.username }} говорит</a>
+		<a style="vertical-align:middle; font-style:bold; text-decoration:none;" href={{ url_for("main.me", username=note.author.username) }}>{{ note.author.username }} {{ _('говорит') }}</a>
 	</div>
 	{{note.body|safe}}
+    <div id=date>
+        {{ moment(note.timestamp).calendar() }}
+    </div>
 </div>

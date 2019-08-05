@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SeriousBlog | {% block title%}{% endblock %}</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} ?443>
+    <script type="text/javascript">
+        function loginClick() {
+            {% if not current_user.is_anonymous %}
+            location.href = '/me';
+            {% else %}
+            location.href = '/login';
+            {% endif %}
+        }
+
+        function logOut() {
+            location.href = '/logout';
+        }
+
+        function register() {
+            location.href = '/register';
+        }
+
+    </script>
+
+    {{ moment.include_moment() }}
+    {{ moment.lang('ru') }}
+</head>
+<body>
+
+    <div id=header>
+        <div id=header_content>
+
+            <span id=logo>
+                <a href={{ url_for('main.notes') }} id=main_link>SeriousBlog</a>
+            </span>
+
+            <a id=globe href={{ url_for("main.notes") }}>
+                Главная
+            </a>
+
+            |
+
+            <a id=globe href={{ url_for("main.globe") }}>
+                Глобус
+            </a>
+
+            <div id=btn>
+                <a id=login
+                   href={% if current_user.is_anonymous %}
+                   {{ url_for('auth.login') }}
+                   {% else %}
+                   {{ url_for('main.me', username=current_user.username) }}
+                   {% endif %}>
+                    <img class=avatar style="width: 2em; height: 2em;" src={% if current_user.is_anonymous %}
+                         {{ url_for('static', filename='account.svg') }}
+                         {% else %}
+                         {{ current_user.avatar(45) }}
+                         {% endif %} />
+
+
+                    <span style="font-size: 0.9em; vertical-align: middle;">
+                        {% if current_user.is_anonymous %}
+                        Войти
+                        {% else %}
+                        {{ current_user.username }}
+                        {% endif %}
+                    </span>
+
+                </a>
+
+                |
+
+                {%if current_user.is_anonymous%}
+                <a id=sign_in href={{ url_for('auth.register') }}>
+                    Зарегистрироваться
+                </a>
+                {%else%}
+                <a id=sign_out href={{ url_for('auth.logout') }}>
+                    Выйти
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    {% block notes %}
+    {% endblock %}
+
+</body>
+
+</html>

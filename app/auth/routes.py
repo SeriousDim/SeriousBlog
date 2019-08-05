@@ -1,6 +1,7 @@
 from flask import render_template, redirect, flash, url_for, request
 from app import db
 from flask_login import current_user, login_user
+from flask_babel import _
 from app.models import User
 from werkzeug.urls import url_parse
 from app.auth import bp
@@ -17,7 +18,7 @@ def login():
     if form.validate_on_submit():                           # вызывается при запросе POST, при нажатии на кнопку Submit
         user = User.query.filter_by(username=form.username.data).first()
         if user == None or not user.check_password(form.password.data):     # если пользователя не существует млм пароль неверный
-            flash("Неверное имя пользователя или пароль")
+            flash(_("Неверное имя пользователя или пароль"))
             return render_template("auth/login.html", form=form)                 # возвращаем эту же самую форму
 
         login_user(user, remember=form.remember.data)      # иначе входим в систему

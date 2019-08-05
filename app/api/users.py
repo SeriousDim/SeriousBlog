@@ -2,6 +2,7 @@ from app.api import bp
 from app.models import User, Post
 from app import db
 from flask import jsonify, request, url_for, g
+from flask_babel import _
 
 from app.api.errors import bad_request
 from app.api.auth import token_auth
@@ -14,7 +15,8 @@ from app.api.auth import token_auth
 @bp.route('/test_post', methods=["POST"])
 def test_post():
     data = request.get_json() or {}
-    return jsonify({'body': "I got some data: "+data["body"]})
+    ans = _("I got some data: ")
+    return jsonify({'body': ans+data["body"]})
 
 @bp.route('/users/<int:id>/posts', methods=["GET"])
 def get_posts(id):
@@ -27,7 +29,7 @@ def get_posts(id):
 def create_post():
     data = request.get_json() or {}
     if 'body' not in data:
-        return bad_request("must include body")
+        return bad_request(_("must include body"))
     post = Post(body=data['body'], author=g.current_user)
     db.session.add(post)
     db.session.commit()
@@ -46,11 +48,11 @@ def get_users():
 def create_user():
     data = request.get_json() or {}
     if 'username' not in data or 'email' not in data or 'password' not in data:
-        return bad_request('must include username, email and password fields')
+        return bad_request(_('must include username, email and password fields'))
     if User.query.filter_by(username=data['username']).first():
-        return bad_request('please use a different username')
+        return bad_request(_('please use a different username'))
     if User.query.filter_by(email=data['email']).first():
-        return bad_request('please use a different email address')
+        return bad_request(_('please use a different email address'))
     user = User()
     user.from_dict(data, new_user=True)
     db.session.add(user)
@@ -79,10 +81,10 @@ def update_user(id):
     data = request.get_json() or {}
     if 'username' in data and data['username'] != user.username and \
             User.query.filter_by(username=data['username']).first():
-        return bad_request('please use a different username')
+        return bad_request(_('please use a different username'))
     if 'email' in data and data['email'] != user.email and \
             User.query.filter_by(email=data['email']).first():
-        return bad_request('please use a different email address')
+        return bad_request(_('please use a different email address'))
     user.from_dict(data, new_user=False)
     db.session.commit()
     return jsonify(user.to_dict())

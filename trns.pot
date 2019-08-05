@@ -1,0 +1,199 @@
+# Translations template for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-08-05 20:03+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: app/models.py:37
+msgid "Расскажите о себе"
+msgstr ""
+
+#: app/auth/forms.py:12
+msgid "Логин"
+msgstr ""
+
+#: app/auth/forms.py:13 app/auth/forms.py:23
+msgid "Пароль"
+msgstr ""
+
+#: app/auth/forms.py:14
+msgid "Запомнить меня"
+msgstr ""
+
+#: app/auth/forms.py:15 app/templates/main/base.html:45
+msgid "Войти"
+msgstr ""
+
+#: app/auth/forms.py:21 app/main/forms.py:12
+msgid "Имя пользователя"
+msgstr ""
+
+#: app/auth/forms.py:22
+msgid "Почта"
+msgstr ""
+
+#: app/auth/forms.py:25
+msgid "Повторите пароль"
+msgstr ""
+
+#: app/auth/forms.py:26
+msgid "Создать аккаунт"
+msgstr ""
+
+#: app/auth/forms.py:31
+msgid "Пожалуйста, используйте другое имя пользователя"
+msgstr ""
+
+#: app/auth/forms.py:36
+msgid "Этот e-mail уже занят. Пожалуйста, используйте другой"
+msgstr ""
+
+#: app/auth/routes.py:21
+msgid "Неверное имя пользователя или пароль"
+msgstr ""
+
+#: app/errors/handlers.py:15
+msgid "Страница не найдена"
+msgstr ""
+
+#: app/errors/handlers.py:22
+msgid ""
+"Внутренняя ошибка сервера. Извините\n"
+"Изменения отменены"
+msgstr ""
+
+#: app/main/forms.py:14
+msgid "О себе"
+msgstr ""
+
+#: app/main/forms.py:15
+msgid "Изменить"
+msgstr ""
+
+#: app/main/forms.py:25
+msgid "Это имя уже занято, введите другое"
+msgstr ""
+
+#: app/main/forms.py:28
+msgid "Этот e-mail уже занят, используйте другой"
+msgstr ""
+
+#: app/main/forms.py:32
+msgid "Напишите о своих мыслях"
+msgstr ""
+
+#: app/main/forms.py:34
+msgid "Опубликовать"
+msgstr ""
+
+#: app/main/routes.py:86
+msgid "Ваш пост опубликован!"
+msgstr ""
+
+#: app/main/routes.py:109
+msgid "Изменения успешно сохранены"
+msgstr ""
+
+#: app/main/routes.py:124 app/main/routes.py:127 app/main/routes.py:140
+#: app/main/routes.py:142
+msgid "Ошибка"
+msgstr ""
+
+#: app/main/routes.py:124 app/main/routes.py:140
+#, python-format
+msgid "Пользователь %(username)s не найден"
+msgstr ""
+
+#: app/main/routes.py:127 app/main/routes.py:142
+msgid "Вы не можете подписаться на себя!"
+msgstr ""
+
+#: app/templates/auth/login.html:4
+msgid "Вход"
+msgstr ""
+
+#: app/templates/auth/register.html:4
+msgid "Регистрация"
+msgstr ""
+
+#: app/templates/errors/error.html:14
+msgid "Вот это поворот!"
+msgstr ""
+
+#: app/templates/main/_note.html:4
+msgid "говорит"
+msgstr ""
+
+#: app/templates/main/base.html:20
+msgid "Главная"
+msgstr ""
+
+#: app/templates/main/base.html:26
+msgid "Глобус"
+msgstr ""
+
+#: app/templates/main/base.html:57
+msgid "Зарегистрироваться"
+msgstr ""
+
+#: app/templates/main/base.html:61
+msgid "Выйти"
+msgstr ""
+
+#: app/templates/main/edit_profile.html:4
+msgid "Изменение профиля"
+msgstr ""
+
+#: app/templates/main/notes.html:5
+msgid "Записи"
+msgstr ""
+
+#: app/templates/main/notes.html:7
+msgid "Глобус - записи со всего мира"
+msgstr ""
+
+#: app/templates/main/notes.html:64 app/templates/main/user.html:53
+msgid "Команда разработчиков"
+msgstr ""
+
+#: app/templates/main/notes.html:65 app/templates/main/user.html:54
+msgid "Реклама"
+msgstr ""
+
+#: app/templates/main/notes.html:66 app/templates/main/user.html:55
+msgid "О сервисе"
+msgstr ""
+
+#: app/templates/main/notes.html:67 app/templates/main/user.html:56
+msgid "Техническая поддержка"
+msgstr ""
+
+#: app/templates/main/user.html:18
+msgid "Изменить профиль"
+msgstr ""
+
+#: app/templates/main/user.html:22
+msgid "Подписаться"
+msgstr ""
+
+#: app/templates/main/user.html:26
+msgid "Отписаться"
+msgstr ""
+
+#: app/templates/main/user.html:33
+msgid "Был(а) в сети"
+msgstr ""
+

@@ -15,22 +15,23 @@
 				
 				{% if user == current_user %}
 				<a id=submit href={{ url_for("main.edit", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; text-decoration: none;">
-					Изменить профиль
+					{{ _('Изменить профиль') }}
 				</a>
 				{% elif not current_user.is_following(user) %}
 				<a id=submit href={{ url_for("main.follow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; text-decoration: none;">
-					Подписаться
+					{{ _('Подписаться') }}
 				</a>
 				{% else %}
 				<a id=submit href={{ url_for("main.unfollow", username=user.username) }} style="font-size: 0.5em; vertical-align: middle; margin-left: 0.3em; background-color: white; text-decoration: none; color:#4869D6; border: 1px solid #4869D6">
-					Отписаться
+					{{ _('Отписаться') }}
 				</a>
 				{% endif %}
 				
 			</div>
 			
 			<div class=other_user>
-				Был(а) в сети {{ user.last_seen }}
+				{{ _('Был(а) в сети') }}
+				{{ moment(user.last_seen).calendar() }}
 			</div>
 			
 			<div id=about_me>
@@ -50,10 +51,10 @@
 	
 	<footer>
 			SeriousBlog. Created by Serious Games. 2019. All rights reserved.
-			<a href="">Команда разработчиков</a>&nbsp;
-			<a href="">Реклама</a>&nbsp;
-			<a href="">О сервисе</a>&nbsp;
-			<a href="">Техническая поддержка</a>&nbsp;
+			<a href="">{{ _('Команда разработчиков') }}</a>&nbsp;
+			<a href="">{{ _('Реклама') }}</a>&nbsp;
+			<a href="">{{ _('О сервисе') }}</a>&nbsp;
+			<a href="">{{ _('Техническая поддержка') }}</a>&nbsp;
 		</footer>
 
 {% endblock %}

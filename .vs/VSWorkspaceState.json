@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\api",
+    "\\app\\errors",
+    "\\app\\main",
+    "\\app\\templates",
+    "\\app\\templates\\main"
+  ],
+  "SelectedNode": "\\app\\__init__.py",
+  "PreviewInSolutionExplorer": false
+}

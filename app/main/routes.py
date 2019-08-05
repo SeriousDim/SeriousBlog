@@ -7,6 +7,11 @@ from datetime import datetime
 
 from app.main.forms import EditProfileForm, PostForm
 from app.main import bp
+from app.main.email import send_message
+from flask_babel import _
+from flask_babel import lazy_gettext as _l
+from flask_babel import get_locale
+from flask import g
 
 
 
@@ -42,7 +47,7 @@ posts = [
     },
     {
         "author": u1,
-        "body": "Дисциплини́рованность (также самодисципли́на, организо́ванность) — черта характера, или выработанная, ставшая привычкой склонность человека к соблюдению правил работы и норм поведения[1]. Входит в число так называемых «прусских добродетелей». Тесно связана с психологическим понятием самоконтроля. Педагог А. С. Макаренко следующим образом высказывался о дисциплинированности: «Всегда соблюдать дисциплину, выполнять то, что неприятно, но нужно делать, — это и есть высокая дисциплинированность»."
+        "body": "Дисциплинированность (также самодисципли́на, организо́ванность) — черта характера, или выработанная, ставшая привычкой склонность человека к соблюдению правил работы и норм поведения[1]. Входит в число так называемых «прусских добродетелей». Тесно связана с психологическим понятием самоконтроля. Педагог А. С. Макаренко следующим образом высказывался о дисциплинированности: «Всегда соблюдать дисциплину, выполнять то, что неприятно, но нужно делать, — это и есть высокая дисциплинированность»."
     },
     {
         "author": u1,
@@ -59,13 +64,16 @@ posts = [
 
 @bp.before_request
 def before():
+    g.locale = str(get_locale())
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
 
+
 @bp.route("/")
 def main():
+    # send_message('Test subject', "lykov.dmitriy98@gmail.com", "lykov.dmitriy98@gmail.com", 'Здравствуйте, а вам письмо', "<h1>HTML body</h1>")
     return redirect(url_for("main.notes"))
 
 
@@ -78,7 +86,7 @@ def notes():
         post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash("Ваш пост опубликован!")
+        flash(_("Ваш пост опубликован!"))
         return redirect(url_for("main.notes"))
     posts = current_user.followed_posts().all()
     return render_template("main/notes.html", notes=posts, form=form)
@@ -101,7 +109,7 @@ def edit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
-        flash("Изменения успешно сохранены")
+        flash(_("Изменения успешно сохранены"))
         return redirect(url_for("main.edit"))
     elif request.method == "GET":
         form.username.data = current_user.username
@@ -116,10 +124,10 @@ def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
         # flash("Пользователь {} не найден".format(username))
-        return render_template("errors/error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
+        return render_template("errors/error.html", number=_("Ошибка"), description=_("Пользователь %(username)s не найден", username=username))
     if user == current_user:
         # flash('Вы не можете подписаться на себя!')
-        return render_template("errors/error.html", number="Ошибка", description="Вы не можете подписаться на себя!")
+        return render_template("errors/error.html", number=_("Ошибка"), description=_("Вы не можете подписаться на себя!"))
     current_user.follow(user)
     db.session.commit()
     # flash('Вы подписаны!')
@@ -132,9 +140,9 @@ def follow(username):
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        return render_template("errors/error.html", number="Ошибка", description="Пользователь {} не найден".format(username))
+        return render_template("errors/error.html", number=_("Ошибка"), description=_("Пользователь %(username)s не найден", username=username))
     if user == current_user:
-        return render_template("errors/error.html", number="Ошибка", description="Вы не можете отписаться от себя!")
+        return render_template("errors/error.html", number=_("Ошибка"), description=_("Вы не можете подписаться на себя!"))
     current_user.unfollow(user)
     db.session.commit()
     # flash('Вы отписались')

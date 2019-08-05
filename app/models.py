@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 from flask import url_for
+from flask_babel import _
+from flask_babel import lazy_gettext as _l
 
 from base64 import b64encode
 import os
@@ -32,7 +34,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
-    about_me = db.Column(db.String(300), default="Расскажите о себе")
+    about_me = db.Column(db.String(300), default=_("Расскажите о себе"))
 
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)

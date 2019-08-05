@@ -1,0 +1,198 @@
+# English translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-08-05 20:03+0500\n"
+"PO-Revision-Date: 2019-08-05 20:07+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: app/models.py:37
+msgid "Расскажите о себе"
+msgstr "Say about yourself"
+
+#: app/auth/forms.py:12
+msgid "Логин"
+msgstr "Login"
+
+#: app/auth/forms.py:13 app/auth/forms.py:23
+msgid "Пароль"
+msgstr "Password"
+
+#: app/auth/forms.py:14
+msgid "Запомнить меня"
+msgstr "Remember me"
+
+#: app/auth/forms.py:15 app/templates/main/base.html:45
+msgid "Войти"
+msgstr "Login"
+
+#: app/auth/forms.py:21 app/main/forms.py:12
+msgid "Имя пользователя"
+msgstr "Username"
+
+#: app/auth/forms.py:22
+msgid "Почта"
+msgstr "E-mail"
+
+#: app/auth/forms.py:25
+msgid "Повторите пароль"
+msgstr "Repeat password"
+
+#: app/auth/forms.py:26
+msgid "Создать аккаунт"
+msgstr "Create account"
+
+#: app/auth/forms.py:31
+msgid "Пожалуйста, используйте другое имя пользователя"
+msgstr "Please use another username"
+
+#: app/auth/forms.py:36
+msgid "Этот e-mail уже занят. Пожалуйста, используйте другой"
+msgstr "This e-mail is used. Please use other one"
+
+#: app/auth/routes.py:21
+msgid "Неверное имя пользователя или пароль"
+msgstr "Invalid username or password"
+
+#: app/errors/handlers.py:15
+msgid "Страница не найдена"
+msgstr "Page not found"
+
+#: app/errors/handlers.py:22
+msgid "Внутренняя ошибка сервера. Извините\nИзменения отменены"
+msgstr "Internal server error. Sorry\nChanges discarded"
+
+#: app/main/forms.py:14
+msgid "О себе"
+msgstr "About"
+
+#: app/main/forms.py:15
+msgid "Изменить"
+msgstr "Submit"
+
+#: app/main/forms.py:25
+msgid "Это имя уже занято, введите другое"
+msgstr "This username is used, enter another one"
+
+#: app/main/forms.py:28
+msgid "Этот e-mail уже занят, используйте другой"
+msgstr "This e-mail is used, use other one"
+
+#: app/main/forms.py:32
+msgid "Напишите о своих мыслях"
+msgstr "Write your thoughts"
+
+#: app/main/forms.py:34
+msgid "Опубликовать"
+msgstr "Publish"
+
+#: app/main/routes.py:86
+msgid "Ваш пост опубликован!"
+msgstr "Your post is published!"
+
+#: app/main/routes.py:109
+msgid "Изменения успешно сохранены"
+msgstr "Changes saved successfully"
+
+#: app/main/routes.py:124 app/main/routes.py:127 app/main/routes.py:140
+#: app/main/routes.py:142
+msgid "Ошибка"
+msgstr "Error"
+
+#: app/main/routes.py:124 app/main/routes.py:140
+#, python-format
+msgid "Пользователь %(username)s не найден"
+msgstr "User %(username)s is not found"
+
+#: app/main/routes.py:127 app/main/routes.py:142
+msgid "Вы не можете подписаться на себя!"
+msgstr "You cannot subscribe to yourself!"
+
+#: app/templates/auth/login.html:4
+msgid "Вход"
+msgstr "Sign in"
+
+#: app/templates/auth/register.html:4
+msgid "Регистрация"
+msgstr "Registration"
+
+#: app/templates/errors/error.html:14
+msgid "Вот это поворот!"
+msgstr "What a twist!"
+
+#: app/templates/main/_note.html:4
+msgid "говорит"
+msgstr "says"
+
+#: app/templates/main/base.html:20
+msgid "Главная"
+msgstr "Main"
+
+#: app/templates/main/base.html:26
+msgid "Глобус"
+msgstr "The Globe"
+
+#: app/templates/main/base.html:57
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: app/templates/main/base.html:61
+msgid "Выйти"
+msgstr "Log out"
+
+#: app/templates/main/edit_profile.html:4
+msgid "Изменение профиля"
+msgstr "Change profile"
+
+#: app/templates/main/notes.html:5
+msgid "Записи"
+msgstr "Notes"
+
+#: app/templates/main/notes.html:7
+msgid "Глобус - записи со всего мира"
+msgstr "The Globe - notes from all the world"
+
+#: app/templates/main/notes.html:64 app/templates/main/user.html:53
+msgid "Команда разработчиков"
+msgstr "Developer team"
+
+#: app/templates/main/notes.html:65 app/templates/main/user.html:54
+msgid "Реклама"
+msgstr "Advert"
+
+#: app/templates/main/notes.html:66 app/templates/main/user.html:55
+msgid "О сервисе"
+msgstr "About"
+
+#: app/templates/main/notes.html:67 app/templates/main/user.html:56
+msgid "Техническая поддержка"
+msgstr "Support"
+
+#: app/templates/main/user.html:18
+msgid "Изменить профиль"
+msgstr "Change profile"
+
+#: app/templates/main/user.html:22
+msgid "Подписаться"
+msgstr "Subscribe"
+
+#: app/templates/main/user.html:26
+msgid "Отписаться"
+msgstr "Unsubscribe"
+
+#: app/templates/main/user.html:33
+msgid "Был(а) в сети"
+msgstr "Was online"
+
