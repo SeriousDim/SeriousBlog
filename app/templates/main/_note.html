@@ -1,10 +1,41 @@
 <div class=news>
+
 	<div class=who_says>
+
 		<img src={{ note.author.avatar(45) }} class=avatar />
 		<a style="vertical-align:middle; font-style:bold; text-decoration:none;" href={{ url_for("main.me", username=note.author.username) }}>{{ note.author.username }} {{ _('говорит') }}</a>
+		
+		{% if note.language and note.language != g.locale %}
+		<span id="translation{{ note.id }}">
+			<a style="float:right; vertical-align:middle; text-decoration:none; font-style: bold; font-size:1.1em; background-color:green;"
+			id="post_submit" 
+			href="javascript:translate(
+				'#post{{ note.id }}',
+				'#result{{ note.id }}',
+				'#mark{{ note.id }}',
+				'{{ note.language }}',
+				'{{ g.locale }}'
+			);">{{ _('Перевести') }}</a>
+		</span>
+		{% endif %}
+
 	</div>
-	{{note.body|safe}}
+
+	<div id="post{{ note.id }}">
+		{{note.body|safe}}
+	</div>
+
+	<div id="result{{ note.id }}" style="display:none">
+		
+	</div>
+
+	<div id="mark{{ note.id }}" style='display: none; color: green; margin-top: 0.5em; padding-top: 0.5em; text-align: right;'>
+	<i>Переведено с помощью Яндекс.Переводчик</i>
+	</div>
+	
+
     <div id=date>
         {{ moment(note.timestamp).calendar() }}
     </div>
+
 </div>

@@ -135,6 +135,7 @@ class Post(db.Model):
     body = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    language = db.Column(db.String(5))
 
     def __repr__(self):
         return "Post {}. {} {}\n{}".format(self.id, self.user_id, self.timestamp, self.body)

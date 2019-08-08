@@ -20,6 +20,7 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ["dlykov2001@yandex.ru"]
     LANGUAGES = ['ru', 'en']
+    TRANSLATOR_KEY = os.environ.get('TRANSLATOR_KEY')
 
 class TestConfig(Config):
     TESTING = True

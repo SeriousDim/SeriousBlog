@@ -27,7 +27,8 @@ babel = Babel()
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    #return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    return 'ru'
 
 def create_app(config=Config()):
     my_app = Flask(__name__)

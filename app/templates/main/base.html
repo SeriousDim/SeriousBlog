@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} ?4434>
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css') }} ?133>
 {% endblock %}
 
 {% block navbar %}
@@ -53,13 +53,13 @@
                 |
 
                 {%if current_user.is_anonymous%}
-                <a id=sign_in href={{ url_for('auth.register') }}>
-                    {{ _('Зарегистрироваться') }}
-                </a>
+                    <a id=sign_in href={{ url_for('auth.register') }}>
+                        {{ _('Зарегистрироваться') }}
+                    </a>
                 {%else%}
-                <a id=sign_out href={{ url_for('auth.logout') }}>
-                    {{ _('Выйти') }}
-                </a>
+                    <a id=sign_out href={{ url_for('auth.logout') }}>
+                        {{ _('Выйти') }}
+                    </a>
                 {% endif %}
             </div>
 
@@ -75,8 +75,9 @@
 {% endblock %}
 
 {% block scripts %}
+
     <script>
-        function loginClick() {
+			function loginClick() {
                 {% if not current_user.is_anonymous %}
                 location.href = '/me';
                 {% else %}
@@ -91,8 +92,28 @@
             function register() {
                 location.href = '/register';
             }
+			
+			function translate(sElem, tElem, mark, sLang, dLang){
+                $(tElem).show();
+                $(mark).hide();
+				$(tElem).html('<img src="{{ url_for('static', filename='loading.gif') }}"/>');
+				$.post(
+                    '/translate', {
+					text: $(sElem).text(),
+					source_lang: sLang,
+                    dest_lang: dLang
+				}).done(function(response){
+                    $(sElem).hide();
+                    $(tElem).html(response['text']);
+                    $(mark).show();
+                }).fail(function(){
+                    $(tElem).html("{{ _('Ошибка: невозможно связаться с сервером') }}");
+                });
+			}
     </script>
+
     {{ super() }}
     {{ moment.include_moment() }}
     {{ moment.lang(g.locale) }}
+
 {% endblock %}

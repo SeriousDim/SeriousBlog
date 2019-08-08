@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-08-05 20:03+0500\n"
+"POT-Creation-Date: 2019-08-07 20:17+0500\n"
 "PO-Revision-Date: 2019-08-05 20:07+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -21,6 +21,14 @@ msgstr ""
 #: app/models.py:37
 msgid "Расскажите о себе"
 msgstr "Say about yourself"
+
+#: app/translate.py:9
+msgid "Ошибка: сервис перевода не сконфигурирован"
+msgstr "Error: translation service is not configured"
+
+#: app/translate.py:13
+msgid "Ошибка: сервис перевода недоступен"
+msgstr "Error: could not use translation service"
 
 #: app/auth/forms.py:12
 msgid "Логин"
@@ -71,8 +79,12 @@ msgid "Страница не найдена"
 msgstr "Page not found"
 
 #: app/errors/handlers.py:22
-msgid "Внутренняя ошибка сервера. Извините\nИзменения отменены"
-msgstr "Internal server error. Sorry\nChanges discarded"
+msgid ""
+"Внутренняя ошибка сервера. Извините\n"
+"Изменения отменены"
+msgstr ""
+"Internal server error. Sorry\n"
+"Changes discarded"
 
 #: app/main/forms.py:14
 msgid "О себе"
@@ -86,37 +98,37 @@ msgstr "Submit"
 msgid "Это имя уже занято, введите другое"
 msgstr "This username is used, enter another one"
 
-#: app/main/forms.py:28
+#: app/main/forms.py:30
 msgid "Этот e-mail уже занят, используйте другой"
 msgstr "This e-mail is used, use other one"
 
-#: app/main/forms.py:32
+#: app/main/forms.py:34
 msgid "Напишите о своих мыслях"
 msgstr "Write your thoughts"
 
-#: app/main/forms.py:34
+#: app/main/forms.py:36
 msgid "Опубликовать"
 msgstr "Publish"
 
-#: app/main/routes.py:86
+#: app/main/routes.py:47
 msgid "Ваш пост опубликован!"
 msgstr "Your post is published!"
 
-#: app/main/routes.py:109
+#: app/main/routes.py:70
 msgid "Изменения успешно сохранены"
 msgstr "Changes saved successfully"
 
-#: app/main/routes.py:124 app/main/routes.py:127 app/main/routes.py:140
-#: app/main/routes.py:142
+#: app/main/routes.py:85 app/main/routes.py:88 app/main/routes.py:101
+#: app/main/routes.py:103
 msgid "Ошибка"
 msgstr "Error"
 
-#: app/main/routes.py:124 app/main/routes.py:140
+#: app/main/routes.py:85 app/main/routes.py:101
 #, python-format
 msgid "Пользователь %(username)s не найден"
 msgstr "User %(username)s is not found"
 
-#: app/main/routes.py:127 app/main/routes.py:142
+#: app/main/routes.py:88 app/main/routes.py:103
 msgid "Вы не можете подписаться на себя!"
 msgstr "You cannot subscribe to yourself!"
 
@@ -132,9 +144,13 @@ msgstr "Registration"
 msgid "Вот это поворот!"
 msgstr "What a twist!"
 
-#: app/templates/main/_note.html:4
+#: app/templates/main/_note.html:6
 msgid "говорит"
 msgstr "says"
+
+#: app/templates/main/_note.html:17
+msgid "Перевести"
+msgstr "Translate"
 
 #: app/templates/main/base.html:20
 msgid "Главная"
@@ -152,6 +168,10 @@ msgstr "Register"
 msgid "Выйти"
 msgstr "Log out"
 
+#: app/templates/main/base.html:106
+msgid "Ошибка: невозможно связаться с сервером"
+msgstr "Error: could not connect server"
+
 #: app/templates/main/edit_profile.html:4
 msgid "Изменение профиля"
 msgstr "Change profile"
@@ -164,19 +184,19 @@ msgstr "Notes"
 msgid "Глобус - записи со всего мира"
 msgstr "The Globe - notes from all the world"
 
-#: app/templates/main/notes.html:64 app/templates/main/user.html:53
+#: app/templates/main/notes.html:64 app/templates/main/user.html:54
 msgid "Команда разработчиков"
 msgstr "Developer team"
 
-#: app/templates/main/notes.html:65 app/templates/main/user.html:54
+#: app/templates/main/notes.html:65 app/templates/main/user.html:55
 msgid "Реклама"
 msgstr "Advert"
 
-#: app/templates/main/notes.html:66 app/templates/main/user.html:55
+#: app/templates/main/notes.html:66 app/templates/main/user.html:56
 msgid "О сервисе"
 msgstr "About"
 
-#: app/templates/main/notes.html:67 app/templates/main/user.html:56
+#: app/templates/main/notes.html:67 app/templates/main/user.html:57
 msgid "Техническая поддержка"
 msgstr "Support"
 
