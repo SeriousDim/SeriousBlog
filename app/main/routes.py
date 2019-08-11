@@ -12,17 +12,19 @@ from app.main.email import send_message
 from flask_babel import _
 from flask_babel import lazy_gettext as _l
 from flask_babel import get_locale
-from flask import g
+from flask import g, current_app
 from app.translate import translate
+from app.main.forms import SearchForm
 
 
 
-@bp.before_request
+@bp.before_app_request
 def before():
     g.locale = str(get_locale())
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+        g.search_form = SearchForm()
 
 
 
@@ -119,3 +121,18 @@ def globe():
 #@login_required
 def translate_text():
     return jsonify(translate(request.form['text'], request.form['source_lang'], request.form['dest_lang']))
+
+
+
+@bp.route("/search")
+@login_required
+def search():
+    if not g.search_form.validate():
+        return redirect(url_for('main.globe'))
+    page = request.args.get('page', 1, type=int)
+    posts, total = Post.search(g.search_form.q.data, page, 15)
+    next_url = url_for('main.search', q=g.search_form.q.data, page=page+1) \
+        if total > (page * 15) else None
+    prev_url = url_for('main.search', q=g.search_form.q.data, page=page-1) \
+        if page > 1 else None
+    return render_template('main/search.html', notes=posts, next_url=next_url, prev_url=prev_url)

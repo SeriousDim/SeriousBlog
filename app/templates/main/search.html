@@ -1,0 +1,38 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+	{{ _('Поиск записей') }}
+{% endblock %}
+
+{% block notes %}
+	<div id=content>
+	
+		<div id=say_smth>
+            {{ _('Результаты поиска') }}
+        </div>
+
+        {% for note in notes %}
+			{% include "main/_note.html" %}
+		{% endfor %}
+
+        <div class='link_cont'>
+            <div class='prev'>
+                {% if prev_url %}
+                    <a href={{ prev_url }} id='submit'>
+                        {{ _('< Предыдущие') }}
+                    </a>
+                {% endif %}
+            </div>
+            <div class='next'>
+                {% if next_url %}
+                    <a href={{ next_url }} id='submit'>
+                        {{ _('Следующие >') }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+		
+	</div>
+		
+	{% include "main/_footer.html" %}
+{% endblock %}

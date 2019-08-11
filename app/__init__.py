@@ -8,6 +8,8 @@ from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 from flask_babel import Babel
 
+from elasticsearch import Elasticsearch
+
 import logging
 import os
 from logging.handlers import SMTPHandler, RotatingFileHandler
@@ -27,12 +29,16 @@ babel = Babel()
 
 @babel.localeselector
 def get_locale():
-    #return request.accept_languages.best_match(current_app.config['LANGUAGES'])
-    return 'ru'
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    # return 'ru'
 
 def create_app(config=Config()):
     my_app = Flask(__name__)
     my_app.config.from_object(config)
+
+    #elastic search
+    my_app.elastic_search = Elasticsearch([my_app.config['ELASTIC_SEARCH_URL']]) \
+        if my_app.config['ELASTIC_SEARCH_URL'] else None
 
     # инициализация приложения
     db.init_app(my_app)

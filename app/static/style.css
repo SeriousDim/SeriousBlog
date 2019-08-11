@@ -35,6 +35,7 @@ footer{
 .news{
 	background-color:#E3E4E7;
 	padding:0.8em;
+	font-size: 0.9em;
 	margin-top: 1em;
 }
 
@@ -65,7 +66,7 @@ footer{
 }
 			
 #header_content{
-	width: 50em;
+	width: 60em;
 	margin: auto;
 	height:2em;
 }
@@ -77,7 +78,7 @@ footer{
 }
 			
 #content{
-	width: 45em;
+	width: 40em;
 	height: 100%;
 	margin: auto;
 	padding:0.5em;
@@ -273,3 +274,18 @@ footer{
     text-align: right;
 }
 
+.link_cont{
+	width: 100%;
+}
+
+.prev{
+	margin-right: auto;
+}
+
+.next{
+	margin-left: auto;
+}
+
+#search_form{
+	
+}

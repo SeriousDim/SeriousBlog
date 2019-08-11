@@ -21,6 +21,7 @@ class Config(object):
     ADMINS = ["dlykov2001@yandex.ru"]
     LANGUAGES = ['ru', 'en']
     TRANSLATOR_KEY = os.environ.get('TRANSLATOR_KEY')
+    ELASTIC_SEARCH_URL = os.environ.get('ELASTIC_SEARCH_URL')
 
 class TestConfig(Config):
     TESTING = True
